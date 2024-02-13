@@ -1,11 +1,10 @@
-import 'package:flutter/foundation.dart';
 import 'package:uuid/uuid.dart';
 
 final uuid = const Uuid().v4();
 
-enum Category {
-  Food,
-  Travel,
+enum Categorys {
+  food,
+  travel,
   leasure,
   work,
 }
@@ -22,5 +21,5 @@ class Expensemodel {
   final String title;
   final double amount;
   final DateTime date;
-  final Category category;
+  final Categorys category;
 }
