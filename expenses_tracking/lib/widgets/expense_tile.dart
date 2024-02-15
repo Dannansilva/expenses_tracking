@@ -34,7 +34,7 @@ class ExpenseTile extends StatelessWidget {
                     const SizedBox(
                       width: 15,
                     ),
-                    Text(expence.date.toString())
+                    Text(famattedDate.format(expence.date))
                   ],
                 )
               ],
