@@ -1,6 +1,9 @@
 import 'package:uuid/uuid.dart';
+import 'package:intl/intl.dart';
 
 final uuid = const Uuid().v4();
+//date formater
+final famattedDate = DateFormat.yMd();
 
 enum Categorys {
   food,

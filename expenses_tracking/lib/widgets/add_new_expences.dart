@@ -15,6 +15,28 @@ class _AddNewExpenceState extends State<AddNewExpence> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
   Categorys _selectedCategory = Categorys.food;
+
+  //date variable
+  final DateTime initialDate = DateTime.now();
+  final DateTime firstDate = DateTime(
+      DateTime.now().year - 1, DateTime.now().month, DateTime.now().day);
+  final DateTime lastDate = DateTime(
+      DateTime.now().year + 1, DateTime.now().month, DateTime.now().day);
+  DateTime _selectedDate = DateTime.now();
+  //date picker
+  Future<void> _openDatePicker() async {
+    try {
+      //show the date modal and stor the selected date
+      final pickedDate = await showDatePicker(
+          context: context, firstDate: firstDate, lastDate: lastDate);
+      setState(() {
+        _selectedDate = pickedDate!;
+      });
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+
   @override
   void dispose() {
     super.dispose();
@@ -57,9 +79,9 @@ class _AddNewExpenceState extends State<AddNewExpence> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Text("2023/02/13"),
+                    Text(famattedDate.format(_selectedDate)),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: _openDatePicker,
                       icon: Icon(Icons.calendar_today),
                     ),
                   ],
