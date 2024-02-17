@@ -27,15 +27,33 @@ class _ExpensesState extends State<Expenses> {
         title: "pizza",
         amount: 25,
         date: DateTime.now(),
+        category: Categorys.food),
+    Expensemodel(
+        title: "study",
+        amount: 10,
+        date: DateTime.now(),
+        category: Categorys.work),
+    Expensemodel(
+        title: "coffee",
+        amount: 10,
+        date: DateTime.now(),
         category: Categorys.food)
   ];
+  //add new expence
+  void onAddNewExpence(Expensemodel expence) {
+    setState(() {
+      _expensesList.add(expence);
+    });
+  }
 
   //function to open a modal
   void _openAddExpencesOverlay() {
     showModalBottomSheet(
       context: context,
       builder: (context) {
-        return AddNewExpence();
+        return AddNewExpence(
+          onAddExpence: onAddNewExpence,
+        );
       },
     );
   }

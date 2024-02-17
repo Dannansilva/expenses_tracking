@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 import 'package:intl/intl.dart';
 
@@ -11,6 +12,14 @@ enum Categorys {
   leasure,
   work,
 }
+
+// category icons
+final CategoryIcons = {
+  Categorys.food: Icons.lunch_dining,
+  Categorys.travel: Icons.airplanemode_active,
+  Categorys.leasure: Icons.sports_esports,
+  Categorys.work: Icons.work,
+};
 
 class Expensemodel {
   Expensemodel(

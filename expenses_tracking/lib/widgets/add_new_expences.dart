@@ -5,7 +5,8 @@ import 'package:expenses_tracking/pages/models/expenxe.dart';
 import 'package:flutter/material.dart';
 
 class AddNewExpence extends StatefulWidget {
-  const AddNewExpence({super.key});
+  final void Function(Expensemodel expence) onAddExpence;
+  const AddNewExpence({super.key, required this.onAddExpence});
 
   @override
   State<AddNewExpence> createState() => _AddNewExpenceState();
@@ -34,6 +35,43 @@ class _AddNewExpenceState extends State<AddNewExpence> {
       });
     } catch (error) {
       print(error.toString());
+    }
+  }
+
+  //handle form submit
+  void _handleFormSubmit() {
+    //form validation
+    //convert the amount to double
+    final userAmount = double.parse(_amountController.text.trim());
+    if (_titleController.text.isEmpty || userAmount <= 0) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text("enter valid data"),
+            content: Text(
+                "Please eneter valid data for the title and the amount here the tittle cant be empty and the amount cant be less than zero"),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text("close"),
+              ),
+            ],
+          );
+        },
+      );
+    } else {
+      //create the expence
+      Expensemodel newExpence = Expensemodel(
+          title: _titleController.text.trim(),
+          amount: -userAmount,
+          date: _selectedDate,
+          category: _selectedCategory);
+      //save the data
+      widget.onAddExpence(newExpence);
+      Navigator.pop(context);
     }
   }
 
@@ -109,7 +147,9 @@ class _AddNewExpenceState extends State<AddNewExpence> {
                   children: [
                     //close the button
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
                       child: Text(
                         "close",
                         style: TextStyle(color: Colors.white, fontSize: 18),
@@ -123,7 +163,7 @@ class _AddNewExpenceState extends State<AddNewExpence> {
                     ),
                     //save the data and close the modal
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: _handleFormSubmit,
                       child: Text(
                         "Save",
                         style: TextStyle(color: Colors.white, fontSize: 18),

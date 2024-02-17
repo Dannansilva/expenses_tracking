@@ -30,7 +30,7 @@ class ExpenseTile extends StatelessWidget {
                 const Spacer(),
                 Row(
                   children: [
-                    const Icon(Icons.mobile_friendly),
+                    Icon(CategoryIcons[expence.category]),
                     const SizedBox(
                       width: 15,
                     ),
